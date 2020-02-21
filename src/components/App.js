@@ -29,16 +29,40 @@ class App extends React.Component {
     return Object.entries(groupedExercises);
   };
 
+  handleGroupSelected = group => {
+    this.setState(state => ({
+      ...state,
+      group
+    }));
+  };
+
+  handleExerciseSelected = id => {
+    this.setState(state => ({
+      ...state,
+      exercise: state.exercises.find(exercise => exercise.id === id)
+    }));
+  };
+
   render() {
     const exercises = this.getExercisesByGroup();
+    const { group, exercise } = this.state;
 
     return (
       <Container>
         <Header></Header>
 
-        <Exercises exercises={exercises} />
+        <Exercises
+          exercises={exercises}
+          selectedGroup={group}
+          selectedExercise={exercise}
+          onSelect={this.handleExerciseSelected}
+        />
 
-        <Footer groups={groups}></Footer>
+        <Footer
+          selectedGroup={group}
+          groups={groups}
+          onSelect={this.handleGroupSelected}
+        ></Footer>
       </Container>
     );
   }
