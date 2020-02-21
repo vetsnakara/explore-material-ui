@@ -2,13 +2,14 @@ import React from "react";
 
 import { Paper, Tabs, Tab } from "@material-ui/core";
 
-const Footer = () => {
+const Footer = ({ groups }) => {
   return (
     <Paper>
       <Tabs value={0} indicatorColor="primary" textColor="primary" centered>
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
+        <Tab value={0} label="All" />
+        {groups.map(group => (
+          <Tab key={group} label={group} />
+        ))}
       </Tabs>
     </Paper>
   );
