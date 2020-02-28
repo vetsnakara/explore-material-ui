@@ -81,6 +81,7 @@ export default ({
               initState={selectedExercise}
               groups={groups}
               onSubmit={onEdit}
+              submitButtonText="Edit"
             />
           ) : (
               <React.Fragment>

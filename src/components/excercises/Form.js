@@ -44,11 +44,11 @@ class Form extends React.Component {
   handleSubmit = () => this.props.onSubmit(this.state);
 
   render() {
-    const { groups, classes } = this.props;
+    const { groups, classes, submitButtonText = "OK" } = this.props;
     const { title, description, group } = this.state;
 
     return (
-      <form className={classes.root}>
+      <form className={classes.root} onClick={this.handleSubmit} >
         <TextField
           autoFocus
           margin="dense"
@@ -88,8 +88,8 @@ class Form extends React.Component {
           rows={4}
         />
 
-        <Button onClick={this.handleSubmit} color="primary" variant="outlined">
-          Add
+        <Button type="submit" color="primary" variant="outlined">
+          {submitButtonText}
         </Button>
       </form>
     );

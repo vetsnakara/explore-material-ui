@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-  Button,
   Fab,
   Dialog,
   DialogContent,
@@ -19,16 +18,13 @@ const styles = {
   title: {
     padding: "20px 20px 10px"
   },
-  actions: {
-    padding: "20px 10px"
-  },
+
+  actions: { padding: "20px 10px" },
+
   content: {
     display: "flex",
     flexDirection: "column",
-    minWidth: 500,
-    "& > *": {
-      marginBottom: 15
-    },
+    minWidth: 500, "& > *": { marginBottom: 15 },
     padding: "10px 20px"
   }
 };
@@ -86,7 +82,7 @@ class CreateDialog extends React.Component {
             <DialogContentText>
               Please fill out the form below.
             </DialogContentText>
-            <Form groups={groups} onSubmit={this.handleSubmit} />
+            <Form groups={groups} onSubmit={this.handleSubmit} submitButtonText="Create" />
           </DialogContent>
         </Dialog>
       </React.Fragment>
