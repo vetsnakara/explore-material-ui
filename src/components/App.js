@@ -52,6 +52,18 @@ class App extends React.Component {
     }));
   };
 
+  handleExerciseEdit = editedExercise => {
+    this.setState(state => ({
+      ...state,
+      exercises: state.exercises.map(exercise =>
+        exercise.id === editedExercise.id
+          ? editedExercise
+          : exercise),
+      exercise: editedExercise,
+      editMode: false
+    }))
+  }
+
   handleExerciseDelete = id => {
     this.setState(state => ({
       ...state,
@@ -85,7 +97,8 @@ class App extends React.Component {
           editMode={editMode}
           onSelect={this.handleExerciseSelect}
           onDelete={this.handleExerciseDelete}
-          onEdit={this.handleExerciseEditSelect}
+          onEditSelect={this.handleExerciseEditSelect}
+          onEdit={this.handleExerciseEdit}
         />
 
         <Footer

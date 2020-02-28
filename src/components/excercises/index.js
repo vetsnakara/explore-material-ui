@@ -32,6 +32,7 @@ export default ({
   },
   onSelect,
   onDelete,
+  onEditSelect,
   onEdit,
   editMode
 }) => {
@@ -57,7 +58,7 @@ export default ({
                     >
                       <ListItemText primary={exercise.title} />
                       <ListItemSecondaryAction>
-                        <IconButton onClick={() => onEdit(exercise.id)}>
+                        <IconButton onClick={() => onEditSelect(exercise.id)}>
                           <EditIcon />
                         </IconButton>
                         <IconButton onClick={() => onDelete(exercise.id)}>
@@ -79,16 +80,16 @@ export default ({
             <Form
               initState={selectedExercise}
               groups={groups}
-              onSubmit={() => {}}
+              onSubmit={onEdit}
             />
           ) : (
-            <React.Fragment>
-              <Typography variant="h4" style={{ marginBottom: 15 }}>
-                {title}
-              </Typography>
-              <Typography variant="body2">{description}</Typography>
-            </React.Fragment>
-          )}
+              <React.Fragment>
+                <Typography variant="h4" style={{ marginBottom: 15 }}>
+                  {title}
+                </Typography>
+                <Typography variant="body2">{description}</Typography>
+              </React.Fragment>
+            )}
         </Paper>
       </Grid>
     </Grid>

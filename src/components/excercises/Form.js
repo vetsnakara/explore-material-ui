@@ -28,10 +28,11 @@ class Form extends React.Component {
     group: ""
   };
 
-  static getDerivedStateFromProps = (props, state) => {
-    if (!props.initState || props.initState === state) return null;
-    return props.initState;
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.initState && prevProps.initState !== this.props.initState) {
+      this.setState(this.props.initState)
+    }
+  }
 
   handleChange = name => ({ target: { value } }) => {
     this.setState(state => ({
