@@ -28,7 +28,7 @@ class Form extends React.Component {
     group: ""
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps.initState && prevProps.initState !== this.props.initState) {
       this.setState(this.props.initState)
     }
@@ -41,14 +41,17 @@ class Form extends React.Component {
     }));
   };
 
-  handleSubmit = () => this.props.onSubmit(this.state);
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state)
+  };
 
   render() {
     const { groups, classes, submitButtonText = "OK" } = this.props;
     const { title, description, group } = this.state;
 
     return (
-      <form className={classes.root} onClick={this.handleSubmit} >
+      <form className={classes.root} onSubmit={this.handleSubmit} >
         <TextField
           autoFocus
           margin="dense"

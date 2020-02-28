@@ -17,8 +17,9 @@ const Footer = ({ selectedGroup, groups, onSelect }) => {
         value={index}
         indicatorColor="primary"
         textColor="primary"
-        variant="scrollable"
+        // variant="scrollable"
         onChange={handleSelect}
+        centered
       >
         <Tab value={0} label="All" />
         {groups.map(group => (

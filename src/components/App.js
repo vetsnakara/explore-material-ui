@@ -65,6 +65,8 @@ class App extends React.Component {
   }
 
   handleExerciseDelete = id => {
+    if (!window.confirm("Are you sure?")) return;
+
     this.setState(state => ({
       ...state,
       exercises: state.exercises.filter(exercise => exercise.id !== id),
