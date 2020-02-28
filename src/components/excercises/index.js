@@ -7,8 +7,14 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton
 } from "@material-ui/core";
+
+import { Delete as DeleteIcon, Edit as EditIcon } from "@material-ui/icons";
+
+import Form from "./Form";
 
 const style = {
   Container: { margin: "5px -10px" },
@@ -17,13 +23,17 @@ const style = {
 
 export default ({
   exercises,
+  groups,
   selectedGroup,
+  selectedExercise,
   selectedExercise: {
-    id,
     title = "Welcome!",
     description = "Please, select exercise."
-  } = {},
-  onSelect
+  },
+  onSelect,
+  onDelete,
+  onEdit,
+  editMode
 }) => {
   return (
     <Grid container spacing={2} style={style.Container}>
@@ -46,6 +56,14 @@ export default ({
                       onClick={() => onSelect(exercise.id)}
                     >
                       <ListItemText primary={exercise.title} />
+                      <ListItemSecondaryAction>
+                        <IconButton onClick={() => onEdit(exercise.id)}>
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton onClick={() => onDelete(exercise.id)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
                     </ListItem>
                   ))}
                 </List>
@@ -57,10 +75,20 @@ export default ({
 
       <Grid item xs={12} sm>
         <Paper style={style.Paper}>
-          <Typography variant="h4" style={{ marginBottom: 15 }}>
-            {title}
-          </Typography>
-          <Typography variant="body2">{description}</Typography>
+          {editMode ? (
+            <Form
+              initState={selectedExercise}
+              groups={groups}
+              onSubmit={() => {}}
+            />
+          ) : (
+            <React.Fragment>
+              <Typography variant="h4" style={{ marginBottom: 15 }}>
+                {title}
+              </Typography>
+              <Typography variant="body2">{description}</Typography>
+            </React.Fragment>
+          )}
         </Paper>
       </Grid>
     </Grid>

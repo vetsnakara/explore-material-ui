@@ -1,6 +1,6 @@
 import React from "react";
 
-import CreateDialog from "../excercises/dialogs/create";
+import CreateDialog from "../excercises/CreateDialog";
 
 import { withStyles } from "@material-ui/core";
 

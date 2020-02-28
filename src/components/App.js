@@ -9,23 +9,18 @@ import { groups, exercises } from "../store";
 
 class App extends React.Component {
   state = {
-    exercises
+    exercises,
+    exercise: {},
+    editMode: false
   };
 
   getExercisesByGroup = () => {
-    const groupedExercises = this.state.exercises.reduce(
-      (exercises, exercise) => {
-        const { group } = exercise;
-
-        exercises[group] = exercises[group]
-          ? [...exercises[group], exercise]
-          : [exercise];
-
-        return exercises;
-      },
-      {}
-    );
-
+    const groupedExercises = groups.reduce((accumulator, group) => {
+      accumulator[group] = this.state.exercises.filter(
+        exercise => exercise.group === group
+      );
+      return accumulator;
+    }, {});
     return Object.entries(groupedExercises);
   };
 
@@ -39,7 +34,8 @@ class App extends React.Component {
   handleExerciseSelect = id => {
     this.setState(state => ({
       ...state,
-      exercise: state.exercises.find(exercise => exercise.id === id)
+      exercise: state.exercises.find(exercise => exercise.id === id),
+      editMode: false
     }));
   };
 
@@ -56,9 +52,26 @@ class App extends React.Component {
     }));
   };
 
+  handleExerciseDelete = id => {
+    this.setState(state => ({
+      ...state,
+      exercises: state.exercises.filter(exercise => exercise.id !== id),
+      exercise: state.exercise.id === id ? {} : state.exercise,
+      editMode: state.exercise.id === id ? false : state.editMode
+    }));
+  };
+
+  handleExerciseEditSelect = id => {
+    this.setState(state => ({
+      ...state,
+      exercise: state.exercises.find(exercise => exercise.id === id),
+      editMode: true
+    }));
+  };
+
   render() {
     const exercises = this.getExercisesByGroup();
-    const { group, exercise } = this.state;
+    const { group, exercise, editMode } = this.state;
 
     return (
       <Container>
@@ -66,9 +79,13 @@ class App extends React.Component {
 
         <Exercises
           exercises={exercises}
+          groups={groups}
           selectedGroup={group}
           selectedExercise={exercise}
+          editMode={editMode}
           onSelect={this.handleExerciseSelect}
+          onDelete={this.handleExerciseDelete}
+          onEdit={this.handleExerciseEditSelect}
         />
 
         <Footer
