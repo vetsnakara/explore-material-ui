@@ -1,8 +1,12 @@
 import React from "react";
-
-import { Paper, Tabs, Tab } from "@material-ui/core";
+import { AppBar, Tabs, Tab } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
 
 const Footer = ({ selectedGroup, groups, onSelect }) => {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const index = selectedGroup
     ? groups.findIndex(group => group === selectedGroup) + 1
     : 0;
@@ -12,21 +16,22 @@ const Footer = ({ selectedGroup, groups, onSelect }) => {
   };
 
   return (
-    <Paper>
+    <AppBar position="static">
       <Tabs
         value={index}
-        indicatorColor="primary"
-        textColor="primary"
-        // variant="scrollable"
+        indicatorColor="secondary"
+        textColor="secondary"
+        scrollButtons="on"
         onChange={handleSelect}
-        centered
+        centered={!mobile}
+        variant={mobile ? "scrollable" : "standard"}
       >
         <Tab value={0} label="All" />
         {groups.map(group => (
           <Tab key={group} label={group} />
         ))}
       </Tabs>
-    </Paper>
+    </AppBar>
   );
 };
 

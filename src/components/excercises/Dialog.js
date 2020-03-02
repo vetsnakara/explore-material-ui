@@ -9,15 +9,15 @@ import {
 
 class Dialog extends React.Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleOpen = () => {
-    this.setState({ open: true })
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState({ open: false });
   };
 
   render() {
@@ -28,29 +28,18 @@ class Dialog extends React.Component {
       subtitle,
       children,
       openButton: OpenButton,
-      classes = {}
+      ...restProps
     } = this.props;
 
     return (
       <React.Fragment>
         <OpenButton onClick={this.handleOpen} />
 
-        <MuiDialog
-          open={open}
-          onClose={this.handleClose}
-        >
-          <DialogTitle className={classes.title}>
-            {title}
-          </DialogTitle>
+        <MuiDialog open={open} onClose={this.handleClose} {...restProps}>
+          <DialogTitle>{title}</DialogTitle>
 
-          <DialogContent className={classes.content}>
-            {
-              subtitle && (
-                <DialogContentText>
-                  {subtitle}
-                </DialogContentText>
-              )
-            }
+          <DialogContent>
+            {subtitle && <DialogContentText>{subtitle}</DialogContentText>}
             {children(this.handleClose)}
           </DialogContent>
         </MuiDialog>

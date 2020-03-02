@@ -1,11 +1,24 @@
 import React from "react";
-
-import { Container } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 import { Header, Footer } from "./layout";
 import Exercises from "./excercises";
 
 import { groups, exercises } from "../store";
+
+const GlobalStyles = withStyles({
+  "@global": {
+    "html, body, #root": {
+      height: "100%"
+    },
+    "#root": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }
+  }
+})(() => null);
 
 class App extends React.Component {
   state = {
@@ -56,13 +69,12 @@ class App extends React.Component {
     this.setState(state => ({
       ...state,
       exercises: state.exercises.map(exercise =>
-        exercise.id === editedExercise.id
-          ? editedExercise
-          : exercise),
+        exercise.id === editedExercise.id ? editedExercise : exercise
+      ),
       exercise: editedExercise,
       editMode: false
-    }))
-  }
+    }));
+  };
 
   handleExerciseDelete = id => {
     if (!window.confirm("Are you sure?")) return;
@@ -88,8 +100,15 @@ class App extends React.Component {
     const { group, exercise, editMode } = this.state;
 
     return (
-      <Container>
-        <Header groups={groups} onExerciseAdd={this.handleExerciseAdd} />
+      <React.Fragment>
+        <CssBaseline />
+        <GlobalStyles />
+
+        <Header
+          ref={this.appBarRef}
+          groups={groups}
+          onExerciseAdd={this.handleExerciseAdd}
+        />
 
         <Exercises
           exercises={exercises}
@@ -108,7 +127,7 @@ class App extends React.Component {
           groups={groups}
           onSelect={this.handleGroupSelect}
         ></Footer>
-      </Container>
+      </React.Fragment>
     );
   }
 }

@@ -2,17 +2,16 @@ import React from "react";
 
 import CreateDialog from "../excercises/CreateDialog";
 
-import { withStyles } from "@material-ui/core";
-
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
-const styles = {
+const styles = theme => ({
   title: {
     flexGrow: 1
   }
-};
+});
 
-const Header = ({ groups, classes, onExerciseAdd }) => {
+const Header = ({ classes, groups, onExerciseAdd }) => {
   return (
     <AppBar position="static">
       <Toolbar>

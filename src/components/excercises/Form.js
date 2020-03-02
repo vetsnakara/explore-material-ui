@@ -11,15 +11,18 @@ import {
 
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = {
+const styles = theme => ({
   root: {
     display: "flex",
     flexDirection: "column",
     "& > *": {
-      marginBottom: 15
+      marginBottom: theme.spacing(2)
     }
+  },
+  submitButton: {
+    marginTop: theme.spacing(2)
   }
-};
+});
 
 class Form extends React.Component {
   state = this.props.initState || {
@@ -27,12 +30,6 @@ class Form extends React.Component {
     description: "",
     group: ""
   };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.initState && prevProps.initState !== this.props.initState) {
-      this.setState(this.props.initState)
-    }
-  }
 
   handleChange = name => ({ target: { value } }) => {
     this.setState(state => ({
@@ -43,15 +40,15 @@ class Form extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state);
   };
 
   render() {
-    const { groups, classes, submitButtonText = "OK" } = this.props;
+    const { classes, groups, submitButtonText = "OK" } = this.props;
     const { title, description, group } = this.state;
 
     return (
-      <form className={classes.root} onSubmit={this.handleSubmit} >
+      <form className={classes.root} onSubmit={this.handleSubmit}>
         <TextField
           autoFocus
           margin="dense"
@@ -63,13 +60,14 @@ class Form extends React.Component {
           value={title}
         />
 
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Group</InputLabel>
+        <FormControl>
+          <InputLabel id="select-label">Group</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="select-label"
+            id="select"
             value={group}
             onChange={this.handleChange("group")}
+            fullWidth
           >
             {groups.map(group => (
               <MenuItem key={group} value={group}>
@@ -91,7 +89,13 @@ class Form extends React.Component {
           rows={4}
         />
 
-        <Button type="submit" color="primary" variant="outlined">
+        <Button
+          className={classes.submitButton}
+          type="submit"
+          color="primary"
+          variant="outlined"
+          disabled={!title || !group}
+        >
           {submitButtonText}
         </Button>
       </form>

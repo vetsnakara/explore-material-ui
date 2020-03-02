@@ -32,12 +32,6 @@ export const exercises = [
     group: "back"
   },
   {
-    id: "deadlifts",
-    title: "Deadlifts",
-    description: "Back and leg exercise...",
-    group: "back"
-  },
-  {
     id: "squats",
     title: "Squats",
     description: "Legs exercise...",
