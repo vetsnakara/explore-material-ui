@@ -3,16 +3,25 @@
     [
       "@babel/env",
       {
-        "useBuiltIns": "entry",
+        "useBuiltIns": "usage",
         "targets": {
           "browsers": [">1%", "not ie 11", "not op_mini all"]
-        }
+        },
+        "corejs": 3
       }
     ],
     "@babel/react"
   ],
   "plugins": [
     "@babel/proposal-class-properties",
-    "@babel/syntax-dynamic-import"
+    "@babel/transform-runtime",
+    [
+      "import",
+      {
+        "libraryName": "@material-ui/icons",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      }
+    ]
   ]
 }

@@ -1,7 +1,12 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  output: {
+    filename: "[name].[contenthash].js"
+  },
+
   devtool: "cheap-module-source-map",
+
   module: {
     rules: [
       {
@@ -11,6 +16,13 @@ module.exports = {
       }
     ]
   },
+
+  resolve: {
+    alias: {
+      "@material-ui/core": "@material-ui/core/es"
+    }
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html"

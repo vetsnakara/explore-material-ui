@@ -1,5 +1,4 @@
 import React from "react";
-import { compose } from "recompose";
 import CreateDialog from "../excercises/CreateDialog";
 
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
