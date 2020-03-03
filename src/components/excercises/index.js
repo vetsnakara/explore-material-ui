@@ -1,4 +1,7 @@
 import React from "react";
+import { compose } from "recompose";
+
+import { withContext } from "../../context";
 
 import {
   Grid,
@@ -45,11 +48,12 @@ const styles = theme => ({
 
 const Exercises = ({
   classes,
-  exercises,
+  exercisesByGroup,
   groups,
+  editMode,
   selectedGroup,
-  selectedExercise,
-  selectedExercise: {
+  exercise: selectedExercise,
+  exercise: {
     id,
     title = "Welcome!",
     description = "Please, select exercise."
@@ -57,20 +61,13 @@ const Exercises = ({
   onSelect,
   onDelete,
   onEditSelect,
-  onEdit,
-  editMode
+  onEdit
 }) => {
   return (
-    <Grid
-      className={classes.container}
-      container
-      spacing={2}
-      // xs={12}
-      justify="center"
-    >
+    <Grid className={classes.container} container spacing={2} justify="center">
       <Grid className={classes.item} item xs={12} sm={6}>
         <Paper className={classes.paper}>
-          {exercises.map(([group, exercises]) =>
+          {exercisesByGroup.map(([group, exercises]) =>
             !selectedGroup || group === selectedGroup ? (
               <Box key={group}>
                 <Typography
@@ -134,4 +131,4 @@ const Exercises = ({
   );
 };
 
-export default withStyles(styles)(Exercises);
+export default compose(withContext, withStyles(styles))(Exercises);

@@ -3,7 +3,9 @@ import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 
-const Footer = ({ selectedGroup, groups, onSelect }) => {
+import { withContext } from "../../context";
+
+const Footer = ({ selectedGroup, groups, onGroupSelect }) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -12,7 +14,7 @@ const Footer = ({ selectedGroup, groups, onSelect }) => {
     : 0;
 
   const handleSelect = (e, index) => {
-    onSelect(index === 0 ? "" : groups[index - 1]);
+    onGroupSelect(index === 0 ? "" : groups[index - 1]);
   };
 
   return (
@@ -35,4 +37,4 @@ const Footer = ({ selectedGroup, groups, onSelect }) => {
   );
 };
 
-export default Footer;
+export default withContext(Footer);

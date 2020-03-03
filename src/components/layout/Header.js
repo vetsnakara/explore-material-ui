@@ -1,5 +1,5 @@
 import React from "react";
-
+import { compose } from "recompose";
 import CreateDialog from "../excercises/CreateDialog";
 
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
@@ -11,14 +11,14 @@ const styles = theme => ({
   }
 });
 
-const Header = ({ classes, groups, onExerciseAdd }) => {
+const Header = ({ classes }) => {
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography className={classes.title} variant="body1">
           Exercise database
         </Typography>
-        <CreateDialog groups={groups} onCreate={onExerciseAdd} />
+        <CreateDialog />
       </Toolbar>
     </AppBar>
   );

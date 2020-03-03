@@ -7,6 +7,8 @@ import Exercises from "./excercises";
 
 import { groups, exercises } from "../store";
 
+import { Provider } from "../context";
+
 const GlobalStyles = withStyles({
   "@global": {
     "html, body, #root": {
@@ -37,10 +39,10 @@ class App extends React.Component {
     return Object.entries(groupedExercises);
   };
 
-  handleGroupSelect = group => {
+  handleGroupSelect = selectedGroup => {
     this.setState(state => ({
       ...state,
-      group
+      selectedGroup
     }));
   };
 
@@ -95,39 +97,30 @@ class App extends React.Component {
     }));
   };
 
-  render() {
-    const exercises = this.getExercisesByGroup();
-    const { group, exercise, editMode } = this.state;
+  getContext = () => ({
+    ...this.state,
+    groups,
+    exercisesByGroup: this.getExercisesByGroup(),
+    onCreate: this.handleExerciseAdd,
+    onSelect: this.handleExerciseSelect,
+    onDelete: this.handleExerciseDelete,
+    onEditSelect: this.handleExerciseEditSelect,
+    onEdit: this.handleExerciseEdit,
+    onGroupSelect: this.handleGroupSelect
+  });
 
+  render() {
     return (
-      <React.Fragment>
+      <Provider value={this.getContext()}>
         <CssBaseline />
         <GlobalStyles />
 
-        <Header
-          ref={this.appBarRef}
-          groups={groups}
-          onExerciseAdd={this.handleExerciseAdd}
-        />
+        <Header />
 
-        <Exercises
-          exercises={exercises}
-          groups={groups}
-          selectedGroup={group}
-          selectedExercise={exercise}
-          editMode={editMode}
-          onSelect={this.handleExerciseSelect}
-          onDelete={this.handleExerciseDelete}
-          onEditSelect={this.handleExerciseEditSelect}
-          onEdit={this.handleExerciseEdit}
-        />
+        <Exercises />
 
-        <Footer
-          selectedGroup={group}
-          groups={groups}
-          onSelect={this.handleGroupSelect}
-        ></Footer>
-      </React.Fragment>
+        <Footer />
+      </Provider>
     );
   }
 }

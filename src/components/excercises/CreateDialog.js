@@ -1,5 +1,7 @@
 import React from "react";
 
+import { withContext } from "../../context";
+
 import Form from "./Form";
 import Dialog from "./Dialog";
 import AddButton from "./AddButton";
@@ -29,4 +31,4 @@ const CreateDialog = ({ groups, onCreate }) => {
   );
 };
 
-export default CreateDialog;
+export default withContext(CreateDialog);
