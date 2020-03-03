@@ -1,28 +1,32 @@
 {
-  "name": "react",
+  "name": "react-exercises",
   "version": "1.0.0",
+  "license": "MIT",
   "description": "React example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
   "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --port 4000 --compress",
+    "dev": "webpack --mode development --progress",
+    "build": "webpack --mode production --progress"
+  },
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/polyfill": "^7.8.3",
     "@material-ui/core": "^4.9.3",
     "@material-ui/icons": "^4.9.1",
-    "json2mq": "^0.2.0",
     "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-scripts": "3.0.1"
+    "react-dom": "16.12.0"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "@babel/core": "^7.8.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "browserslist": [
     ">0.2%",
